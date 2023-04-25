@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = null;
         try {
             employee = employeeRepository.findById(id)
-                    .orElseThrow(()-> new ResourceNotFoundException("Employee", "id", id));
+                    .orElseThrow(()-> new ResourceNotFoundException("Employee"+id+ "id"));
         } catch (ResourceNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -50,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         try {
             employee = employeeRepository.findById(id)
 
-                    .orElseThrow(()-> new ResourceNotFoundException("Employee", "id", id));
+                    .orElseThrow(()-> new ResourceNotFoundException("Employee"+id+"id"));
 
         } catch (ResourceNotFoundException e) {
             throw new RuntimeException(e);
@@ -68,7 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         }else{
             try {
-                throw new ResourceNotFoundException("Employee", "id", id);
+                throw new ResourceNotFoundException("Employee"+id+ "id");
             } catch (ResourceNotFoundException e) {
                 throw new RuntimeException(e);
             }

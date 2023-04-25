@@ -1,7 +1,19 @@
 package com.bezkoder.spring.security.jwt.exception;
 
-public class ResourceNotFoundException extends Throwable {
-    public ResourceNotFoundException(String message ,String mess,Long id){
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException() {
+        super();
+    }
+
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+
+    public ResourceNotFoundException(String message, Throwable cause) {
+        super(message, cause);
     }
 }
