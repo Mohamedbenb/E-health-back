@@ -1,7 +1,9 @@
 package com.bezkoder.spring.security.jwt.controllers;
 
+import com.bezkoder.spring.security.jwt.exception.ResourceNotFoundException;
 import com.bezkoder.spring.security.jwt.models.Employee;
 import com.bezkoder.spring.security.jwt.payload.dtos.EmployeeDto;
+import com.bezkoder.spring.security.jwt.repository.EmployeeRepository;
 import com.bezkoder.spring.security.jwt.services.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -12,75 +14,74 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.time.temporal.ChronoUnit.YEARS;
+
 @RestController
-@RequestMapping("/api/employees")
+@RequestMapping(path="/api")
 
 public class EmployeeController {
     @Autowired
     private ModelMapper modelMapper;
     private EmployeeService employeeService;
+    private final EmployeeRepository employeeRepository;
 
-    public EmployeeController(EmployeeService employeeService){
+    public EmployeeController(EmployeeService employeeService,
+                              EmployeeRepository employeeRepository){
         super();
         this.employeeService = employeeService;
+        this.employeeRepository = employeeRepository;
     }
 
-    @GetMapping
-    public List<EmployeeDto> getAllEmployees() {
+    @GetMapping("/uniops/{uniopId}/employees")
+    public List<Employee> getAllEmployees(@PathVariable (value = "uniopId") Long uniopId) {
 
-        return employeeService.getAllEmployees().stream().map(
-
-                employee -> modelMapper.map(employee, EmployeeDto.class))
-                .collect(Collectors.toList());
+        return employeeService.getAllEmployees(uniopId);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable(name = "id") Long id) {
-        Employee employee = employeeService.getEmployeeById(id);
-
-        // convert entity to DTO
-        EmployeeDto employeeResponse = modelMapper.map(employee, EmployeeDto.class);
+    @GetMapping("/employees/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable(name = "id") long id) {
+        Employee employeeResponse = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id " + id + "not found"));
 
         return ResponseEntity.ok().body(employeeResponse);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto) {
+    @PostMapping("/uniops/{uniopId}/employees")
+    public ResponseEntity<Employee> createEmployee(@PathVariable(value = "uniopId") Long uniopId, @RequestBody Employee employeeRequest) {
 
         // convert DTO to entity
-        Employee employeeRequest = modelMapper.map(employeeDto, Employee.class);
 
-        Employee employee = employeeService.createEmployee(employeeRequest);
 
-        // convert entity to DTO
-        EmployeeDto employeeResponse = modelMapper.map(employee, EmployeeDto.class);
+        Employee employeeResponse = employeeService.createEmployee(uniopId,employeeRequest);
 
-        return new ResponseEntity<EmployeeDto>(employeeResponse, HttpStatus.CREATED);
+        System.out.println(YEARS.between(LocalDate.now(), employeeResponse.getDatenai()));
+        System.out.println(employeeResponse.getAge());
+
+
+        return new ResponseEntity<>(employeeResponse, HttpStatus.CREATED);
 
     }
 
     // change the request for DTO
     // change the response for DTO
-    @PutMapping("/{id}")
-    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable long id, @RequestBody EmployeeDto employeeDto) {
+    @PutMapping("/employees/{uniopId}/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "uniopId") Long uniopId, @PathVariable long id, @RequestBody Employee employeeRequest) {
 
         // convert DTO to Entity
-        Employee employeeRequest = modelMapper.map(employeeDto, Employee.class);
 
-        Employee employee = employeeService.updateEmployee(id, employeeRequest);
 
-        // entity to DTO
-        EmployeeDto employeeResponse = modelMapper.map(employee, EmployeeDto.class);
+        Employee employeeResponse = employeeService.updateEmployee(uniopId, id, employeeRequest);
+
 
         return ResponseEntity.ok().body(employeeResponse);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable(name = "id") Long id) {
-        employeeService.deleteEmployee(id);
+    public ResponseEntity<String> deleteEmployee(@PathVariable(value = "uniopId") Long uniopId, @PathVariable(value = "id") Long id) {
+        employeeService.deleteEmployee(uniopId, id);
 
         return new ResponseEntity<>( HttpStatus.OK);
     }

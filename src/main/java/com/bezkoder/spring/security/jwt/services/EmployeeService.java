@@ -8,13 +8,13 @@ import java.util.List;
 @Service
 
 public interface EmployeeService {
-    List<Employee> getAllEmployees();
+    List<Employee> getAllEmployees(Long uniopID);
 
-    Employee createEmployee(Employee employee);
+    Employee createEmployee(Long uniopId, Employee employee);
 
-    Employee updateEmployee(long id, Employee employee);
+    Employee updateEmployee(Long uniopId,long id, Employee employee);
 
-    Employee deleteEmployee(long id);
+    Employee deleteEmployee(Long uniopId,long id);
 
-    Employee getEmployeeById(long id);
+    Employee getEmployeeById(Long uniopId,long id);
 }
