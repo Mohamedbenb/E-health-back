@@ -26,9 +26,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.uniOpRepository = uniOpRepository;
     }
     @Override
-    public List<Employee> getAllEmployees(Long uniopId){
+    public List<Employee> getAllEmployees(){
 
-        return employeeRepository.findByUniopIdAndActive(uniopId, true);
+        return employeeRepository.findAllByActive(true);
     }
     @Override
     public Employee createEmployee(Long uniopId, Employee employee){

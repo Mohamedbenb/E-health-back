@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 
 public interface EmployeeService {
-    List<Employee> getAllEmployees(Long uniopID);
+    List<Employee> getAllEmployees();
 
     Employee createEmployee(Long uniopId, Employee employee);
 

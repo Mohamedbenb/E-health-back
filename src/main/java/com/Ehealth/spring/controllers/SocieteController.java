@@ -42,15 +42,7 @@ public class SocieteController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Societe> createSociete(@RequestBody Societe societeReq) {
-
-
-
-
         Societe societe = societeService.createSociete(societeReq);
-
-
-
-
         return new ResponseEntity<Societe>(societe, HttpStatus.CREATED);
 
     }

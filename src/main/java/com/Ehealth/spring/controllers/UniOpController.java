@@ -1,6 +1,7 @@
 package com.Ehealth.spring.controllers;
 
 import com.Ehealth.spring.models.UniOp;
+import com.Ehealth.spring.payload.dtos.UniOpIdTitleDto;
 import com.Ehealth.spring.repository.UniOpRepository;
 import com.Ehealth.spring.services.UniOpService;
 import com.Ehealth.spring.exception.ResourceNotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,12 +31,20 @@ public class UniOpController {
         this.uniOpService = uniOpService;
     }
 
-    @GetMapping("/societes/{societeId}/uniops")
-    public List<UniOp> getAllUniOps(@PathVariable (value = "societeId") Long societeId) {
-
-        return uniOpService.getAllUniOps(societeId);
+    @GetMapping("/uniops")
+    public List<UniOp> getAllUniOps() {
+        return uniOpService.getAllUniOps();
     }
 
+
+    @GetMapping("/getAllUniOpsIdTitle")
+    public List<UniOpIdTitleDto> getAllUniOpsIdTitle() {
+        List<UniOpIdTitleDto> uniOpIdTitleDtos=new ArrayList<>();
+        uniOpService.getAllUniOps().forEach(uniOp -> {
+            uniOpIdTitleDtos.add(new UniOpIdTitleDto(uniOp.getId(),uniOp.getTitle()));
+        });
+        return uniOpIdTitleDtos;
+    }
     @GetMapping("/uniops/{id}")
     public ResponseEntity<UniOp> getUniOpById(@PathVariable(value = "id") Long id) {
         UniOp uniOp = uniOpRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("uniOpId " + id + "not found"));

@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface UniOpRepository extends JpaRepository<UniOp,Long> {
 
     @Query("select n from UniOp n where n.active = true")
-    List<UniOp> findAllByStatus();
+    List<UniOp> findAllByActive();
     List<UniOp> findBySocieteId(Long uniopId);
     Optional<UniOp> findByIdAndSocieteId( Long societeId, Long id);
 }

@@ -31,10 +31,10 @@ public class EmployeeController {
         this.employeeRepository = employeeRepository;
     }
 
-    @GetMapping("/employees/{uniopId}/")
-    public List<Employee> getAllEmployees(@PathVariable (value = "uniopId") Long uniopId) {
+    @GetMapping("/employees")
+    public List<Employee> getAllEmployees() {
 
-        return employeeService.getAllEmployees(uniopId);
+        return employeeService.getAllEmployees();
     }
 
     @GetMapping("/employees/{id}")
@@ -65,7 +65,6 @@ public class EmployeeController {
     @PutMapping("/employees/{uniopId}/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "uniopId") Long uniopId, @PathVariable long id, @RequestBody Employee employeeRequest) {
 
-        // convert DTO to Entity
 
 
         Employee employeeResponse = employeeService.updateEmployee(uniopId, id, employeeRequest);

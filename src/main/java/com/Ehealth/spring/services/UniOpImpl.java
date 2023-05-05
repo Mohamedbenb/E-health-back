@@ -20,9 +20,9 @@ public class UniOpImpl implements UniOpService {
         this.societeRepository = SocieteRepository;
     }
     @Override
-    public List<UniOp> getAllUniOps(Long societeId){
+    public List<UniOp> getAllUniOps(){
 
-        return uniOpRepository.findBySocieteId(societeId);
+        return uniOpRepository.findAllByActive();
     }
     @Override
     public UniOp createUniOp(Long societeId, UniOp uniOp)

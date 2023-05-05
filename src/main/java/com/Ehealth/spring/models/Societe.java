@@ -33,7 +33,7 @@ public class Societe {
     @Column(name="CodePostale")
     private String codepostale;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="societe")
-    private Set<UniOp> uniops = new HashSet<>();
+    private List<UniOp> uniops ;
     @Column(name="active")
     private boolean active = true;
     public Boolean isActive() {

@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -21,12 +22,13 @@ public class UniOp {
     private Long id;
     @Column(name="title")
     private String title;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="societe_id", nullable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Societe societe;
-
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="uniop")
+    private List<Employee> employees ;
     public UniOp() {}
     @Column(name="active")
     private boolean active;

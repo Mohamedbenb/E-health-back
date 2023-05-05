@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UniOpService {
 
-    List<UniOp> getAllUniOps(Long societeId);
+    List<UniOp> getAllUniOps();
 
     UniOp createUniOp(Long societeId,UniOp uniop);
 

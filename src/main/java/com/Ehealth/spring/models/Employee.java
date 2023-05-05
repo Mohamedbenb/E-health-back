@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name="firstname")
@@ -42,17 +43,21 @@ public class Employee {
     private boolean active = true;
     @Column(name="status")
     private boolean status;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="uniop_id", nullable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private UniOp uniop;
+    @Transient
+    private Long idOp;
+
+
     public void setActive(boolean active) {
         this.active = active;
     }
 
 
-
-
-
+    public Long getIdOp() {
+        return uniop.getId();
+    }
 }

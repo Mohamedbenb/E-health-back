@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableAsync
-public class SpringSecurityRefreshTokenApplication {
+public class EhealthApplication {
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
@@ -16,7 +16,7 @@ public class SpringSecurityRefreshTokenApplication {
 
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringSecurityRefreshTokenApplication.class, args);
+		SpringApplication.run(EhealthApplication.class, args);
 	}
 
 }
