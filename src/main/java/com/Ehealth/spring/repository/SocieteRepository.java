@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface SocieteRepository extends JpaRepository<Societe,Long> {
 
-    @Query("select n from Societe n where n.active = true")
+    @Query("SELECT DISTINCT s FROM Societe s LEFT JOIN FETCH s.uniops u WHERE s.active = true AND (u.active = true OR u IS NULL)")
     List<Societe> findAllByStatus();
+    List<Societe> findByActiveTrueAndUniopsActiveTrueOrUniopsIsNull();
 }

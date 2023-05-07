@@ -65,8 +65,8 @@ public class UniOpImpl implements UniOpService {
     }
 
     @Override
-    public UniOp getUniOpById(Long societeId, Long uniOpid) {
-        Optional<UniOp> result = uniOpRepository.findByIdAndSocieteId(societeId,uniOpid);
+    public UniOp getUniOpById(Long societeId, Long uniOpid, boolean b) {
+        Optional<UniOp> result = uniOpRepository.findByIdAndSocieteIdAndActive(societeId,uniOpid, true);
         if(result.isPresent()){
             return result.get();
 

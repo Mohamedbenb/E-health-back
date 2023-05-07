@@ -14,6 +14,6 @@ public interface UniOpService {
 
     UniOp deleteUniOp(Long societeId,Long id);
 
-    UniOp getUniOpById(Long societeId,Long id);
+    UniOp getUniOpById(Long societeId,Long id, boolean b);
 }
 
