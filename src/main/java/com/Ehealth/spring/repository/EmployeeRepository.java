@@ -13,6 +13,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
     @Query("select e from Employee e where e.active = true")
     List<Employee> findAllByActive(boolean b);
 
-    List<Employee> findByUniopIdAndActive(Long employeeId, boolean a);
+    Optional<Employee> findByIdAndActive(Long employeeId, boolean a);
     Optional<Employee> findByIdAndUniopId(Long uniopId, long id);
 }

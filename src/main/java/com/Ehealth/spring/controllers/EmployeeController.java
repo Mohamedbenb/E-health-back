@@ -1,5 +1,6 @@
 package com.Ehealth.spring.controllers;
 
+import com.Ehealth.spring.enume.Mainoeu;
 import com.Ehealth.spring.exception.ResourceNotFoundException;
 import com.Ehealth.spring.models.Employee;
 import com.Ehealth.spring.repository.EmployeeRepository;
@@ -11,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.YEARS;
 
@@ -36,7 +39,14 @@ public class EmployeeController {
 
         return employeeService.getAllEmployees();
     }
+    @GetMapping("/mainoeus")
+    public ResponseEntity<List<String>> getEmployeeStatuses() {
+        List<String> employeeStatuses = Arrays.stream(Mainoeu.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
 
+        return ResponseEntity.ok(employeeStatuses);
+    }
     @GetMapping("/employees/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable(name = "id") long id) {
         Employee employeeResponse = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id " + id + "not found"));

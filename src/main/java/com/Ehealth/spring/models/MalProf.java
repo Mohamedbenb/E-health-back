@@ -26,6 +26,11 @@ public class MalProf {
 
     private String typedelai;
 
+    private String effects;
+
+    @Column(length=2000)
+    private String design;
+
     private boolean active = true;
 
 }

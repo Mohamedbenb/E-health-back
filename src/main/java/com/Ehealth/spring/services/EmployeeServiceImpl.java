@@ -56,6 +56,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                     employee.setDatenai(employeeRequest.getDatenai());
                     employee.setPostetrav(employeeRequest.getPostetrav());
                     employee.setEmail(employeeRequest.getEmail());
+                    employee.setMainoeu(employeeRequest.getMainoeu());
             if (employeeRequest.getDatenai()!=null){
                 employee.setAge(YEARS.between(employeeRequest.getDatenai(), LocalDate.now()));
             }else {

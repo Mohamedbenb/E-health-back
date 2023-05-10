@@ -38,6 +38,10 @@ public class MalProfServiceImpl implements MalProfService {
             malprof.setTitle(malprofreq.getTitle());
             malprof.setNbr(malprofreq.getNbr());
             malprof.setTypedelai(malprofreq.getTypedelai());
+            malprof.setEffects(malprofreq.getEffects());
+            malprof.setDesign(malprofreq.getDesign());
+
+
             return malprofRepository.save(malprof);
         }).orElseThrow(()->new ResourceNotFoundException("resource not found " + id + "not found"));
     }

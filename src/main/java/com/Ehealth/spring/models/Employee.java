@@ -1,5 +1,6 @@
 package com.Ehealth.spring.models;
 
+import com.Ehealth.spring.enume.Mainoeu;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
@@ -7,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,6 +45,11 @@ public class Employee {
     private boolean active = true;
     @Column(name="status")
     private boolean status;
+    @Enumerated(EnumType.STRING)
+    private Mainoeu mainoeu;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Visite> visites = new ArrayList<>();
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="uniop_id", nullable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)

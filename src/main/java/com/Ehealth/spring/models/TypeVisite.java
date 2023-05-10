@@ -2,6 +2,7 @@ package com.Ehealth.spring.models;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -21,9 +23,22 @@ public class TypeVisite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name="title")
-    private String title;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="typevisite")
-    private List<Visite> visites ;
+    @Column(name="type")
+    private String type;
+
+
+    @OneToMany(mappedBy = "primaryType", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Visite> primaryVisites;
+
+    @OneToMany(mappedBy = "secondaryType", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Visite> secondaryVisites;
+
+    private int frequency;
+    @Column(name="remarque")
+    private String remarque;
+
+    private boolean active = true;
 
 }

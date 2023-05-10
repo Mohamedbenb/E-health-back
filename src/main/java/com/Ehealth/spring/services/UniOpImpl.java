@@ -43,6 +43,7 @@ public class UniOpImpl implements UniOpService {
 
         return uniOpRepository.findById(uniOpId).map(uniOp -> {
             uniOp.setTitle(uniOpRequest.getTitle());
+            uniOp.setReshum(uniOpRequest.getReshum());
             return uniOpRepository.save(uniOp);
         }).orElseThrow(() -> new ResourceNotFoundException("uniOpId " + uniOpId + "not found"));
     }

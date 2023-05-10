@@ -22,6 +22,7 @@ public class UniOp {
     private Long id;
     @Column(name="title")
     private String title;
+    private String reshum;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="societe_id", nullable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)

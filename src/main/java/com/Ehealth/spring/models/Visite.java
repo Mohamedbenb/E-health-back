@@ -9,6 +9,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -21,9 +23,27 @@ public class Visite {
     private Long id;
     @Column(name="recommendation")
     private String recommendation;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="typevisite_id", nullable=false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private TypeVisite typevisite;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name="primary_type_id", nullable=false)
+
+
+    private TypeVisite primaryType;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="secondary_type_id")
+
+
+    private TypeVisite secondaryType;
+
+    @Column(name = "visit_date1")
+    private LocalDate visitDate;
+
+    @Column(name = "valid")
+    private boolean valid;
+
+    private boolean active = true;
 }

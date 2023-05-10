@@ -52,14 +52,7 @@ public class SocieteController {
     @PutMapping("/{id}")
     public ResponseEntity<Societe> updateSociete(@PathVariable Long id, @RequestBody Societe societeReq) {
 
-        // convert DTO to Entity
-
-
         Societe societe = societeService.updateSociete(id, societeReq);
-
-        // entity to DTO
-
-
         return ResponseEntity.ok().body(societe);
     }
 
