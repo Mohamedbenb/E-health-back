@@ -38,7 +38,8 @@ public class TypeVisite {
     private int frequency;
     @Column(name="remarque")
     private String remarque;
-
+    @OneToOne
+    private Color color;
     private boolean active = true;
 
 }

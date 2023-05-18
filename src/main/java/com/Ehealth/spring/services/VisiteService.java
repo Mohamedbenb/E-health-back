@@ -14,5 +14,7 @@ public interface VisiteService {
     List<Visite> getVisitsByTypeVisite(Long visitTypeId);
     Visite getVisitById(Long visitId);
     Visite deleteVisite(Long visitId);
+    List <Visite> getunvalid(boolean b);
+    Visite ValidateVisite(Long visitId, String visite);
 
 }

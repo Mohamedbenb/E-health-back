@@ -16,6 +16,6 @@ public class DateCalDto {
     private LocalDateTime start;
     private LocalDateTime end;
     private Boolean draggable;
-    private DateCal.Color color ;
+    //private DateCal.Color color ;
     private Boolean active = true;
 }

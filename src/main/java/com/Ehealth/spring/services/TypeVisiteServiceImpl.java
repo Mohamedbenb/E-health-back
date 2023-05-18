@@ -1,7 +1,9 @@
 package com.Ehealth.spring.services;
 
 import com.Ehealth.spring.exception.ResourceNotFoundException;
+import com.Ehealth.spring.models.Color;
 import com.Ehealth.spring.models.TypeVisite;
+import com.Ehealth.spring.repository.ColorRepository;
 import com.Ehealth.spring.repository.TypeVisiteRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,13 @@ import java.util.Optional;
 @Service
 public class TypeVisiteServiceImpl implements TypeVisiteService{
     private final TypeVisiteRepository typeVisiteRepository;
-    public TypeVisiteServiceImpl(TypeVisiteRepository typeVisiteRepository) {
+    private final ColorRepository colorRepository;
+
+    public TypeVisiteServiceImpl(TypeVisiteRepository typeVisiteRepository,
+                                 ColorRepository colorRepository) {
         this.typeVisiteRepository = typeVisiteRepository;
 
+        this.colorRepository = colorRepository;
     }
 
     @Override
@@ -29,17 +35,20 @@ public class TypeVisiteServiceImpl implements TypeVisiteService{
 
     @Override
     public TypeVisite createTypeVisite(TypeVisite typeVisite) {
+        colorRepository.save(typeVisite.getColor());
         return typeVisiteRepository.save(typeVisite);
     }
 
     @Override
     public TypeVisite updateTypeVisite(Long id, TypeVisite typeVisite) {
+        //Color color = colorRepository.findById(colorid).orElseThrow(()->new ResourceNotFoundException("id"+colorid+"id"));
         TypeVisite existingTypeVisite = typeVisiteRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("TypeVisite with ID " + id + " not found"));
 
         existingTypeVisite.setType(typeVisite.getType());
         existingTypeVisite.setFrequency(typeVisite.getFrequency());
         existingTypeVisite.setRemarque(typeVisite.getRemarque());
+        existingTypeVisite.setColor(typeVisite.getColor());
 
         return typeVisiteRepository.save(existingTypeVisite);
     }

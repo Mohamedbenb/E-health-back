@@ -1,6 +1,7 @@
 package com.Ehealth.spring.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,38 +31,15 @@ public class DateCal {
     @Column(name="draggable")
     private Boolean draggable = true;
 
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Visite visite;
     @Column(name="active")
     private boolean active;
+    @OneToOne
+    private Color color;
 
-    @Column(name="color")
-    @Embedded
-    private Color  color ;
-    @Embeddable
 
-    public static class Color {
 
-        @Column(name="primary")
-        private String primary;
-        @Column(name="secondary")
-        private String secondary;
-
-        public String getPrimary() {
-            return primary;
-        }
-
-        public void setPrimary(String primary) {
-            this.primary = primary;
-        }
-
-        public String getSecondary() {
-            return secondary;
-        }
-
-        public void setSecondary(String secondary) {
-            this.secondary = secondary;
-        }
-        // getters and setters
-    }
 
 }

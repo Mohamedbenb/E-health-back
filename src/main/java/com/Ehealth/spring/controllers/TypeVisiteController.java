@@ -37,9 +37,9 @@ public class TypeVisiteController {
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<TypeVisite> updateSociete(@PathVariable Long id, @RequestBody TypeVisite typeVisiteReq) {
+    public ResponseEntity<TypeVisite> updateSociete(@PathVariable Long id,  @RequestBody TypeVisite typeVisiteReq) {
 
-        TypeVisite typeVisite = typeVisiteService.updateTypeVisite(id, typeVisiteReq);
+        TypeVisite typeVisite = typeVisiteService.updateTypeVisite(id, typeVisiteReq );
         return ResponseEntity.ok().body(typeVisite);
     }
 

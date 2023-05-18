@@ -53,11 +53,12 @@ public class Employee {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="uniop_id", nullable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+
     private UniOp uniop;
     @Transient
     private Long idOp;
-
+    @Transient
+    private String uniopname;
 
     public void setActive(boolean active) {
         this.active = active;
@@ -66,5 +67,8 @@ public class Employee {
 
     public Long getIdOp() {
         return uniop.getId();
+    }
+    public String getUniopname(){
+        return uniop.getTitle();
     }
 }

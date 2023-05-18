@@ -30,7 +30,7 @@ public class VisiteServiceImpl implements VisiteService{
     }
 
     @Override
-        public Visite createVisit(Long employeeid, Long primtypeId, Long secondtypeId, Visite visite) {
+    public Visite createVisit(Long employeeid, Long primtypeId, Long secondtypeId, Visite visite) {
         Employee employee = employeeRepository.findByIdAndActive(employeeid, true).orElseThrow(() -> new ResourceNotFoundException("Employee with ID " + employeeid + " not found"));
 
         TypeVisite primaryType = visitTypeRepository.findByIdAndActive(primtypeId, true).orElseThrow(() -> new ResourceNotFoundException("TypeVisit with ID " + primtypeId + " not found"));
@@ -73,6 +73,21 @@ public class VisiteServiceImpl implements VisiteService{
     public Visite deleteVisite(Long visitId) {
         return visiteRepository.findById(visitId)
                 .orElseThrow(() -> new ResourceNotFoundException("Visit with ID " + visitId + " not found"));
+    }
+
+    @Override
+    public List<Visite> getunvalid(boolean b) {
+        return visiteRepository.findByValid(b);
+    }
+
+    @Override
+    public Visite ValidateVisite(Long visitId, String req) {
+       Visite visite = visiteRepository.findById(visitId).orElseThrow(() -> new ResourceNotFoundException("Visit with ID " + visitId + " not found"));
+        visite.setValid(true);
+        visite.getDatevis().setActive(false);
+        visite.setRecommendation(req);
+        visiteRepository.save(visite);
+        return visite;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.Ehealth.spring.controllers;
 
+import com.Ehealth.spring.models.Employee;
 import com.Ehealth.spring.models.Visite;
 import com.Ehealth.spring.payload.dtos.VisiteRequest;
 import com.Ehealth.spring.services.VisiteService;
@@ -44,7 +45,16 @@ public class VisiteController {
         List<Visite> visites = visiteService.getVisitsByEmployee(employeeId);
         return ResponseEntity.ok(visites);
     }
+    @PutMapping("/validate/{id}")
+    public ResponseEntity<Visite> validateVisite( @PathVariable long id, @RequestBody String req) {
 
+
+
+        Visite visiteResponse = visiteService.ValidateVisite( id, req);
+
+
+        return ResponseEntity.ok().body(visiteResponse);
+    }
     @GetMapping("/type/{visitTypeId}")
     public ResponseEntity<List<Visite>> getVisitsByTypeVisite(@PathVariable Long visitTypeId) {
         List<Visite> visites = visiteService.getVisitsByTypeVisite(visitTypeId);
@@ -55,6 +65,11 @@ public class VisiteController {
     public ResponseEntity<Void> deleteVisite(@PathVariable Long visitId) {
         visiteService.deleteVisite(visitId);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/unvalid")
+    public ResponseEntity<List<Visite>> getunvalid() {
+        List<Visite> visites = visiteService.getunvalid(false);
+        return ResponseEntity.ok(visites);
     }
 }
 

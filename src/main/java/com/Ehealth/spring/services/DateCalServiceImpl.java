@@ -5,6 +5,7 @@ import com.Ehealth.spring.repository.DateCalRepository;
 import com.Ehealth.spring.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,14 +36,14 @@ public class DateCalServiceImpl implements DateCalService {
         } catch (ResourceNotFoundException e) {
             throw new RuntimeException(e);
         }
-        DateCal.Color color = new DateCal.Color();
+        //DateCal.Color color = new DateCal.Color();
         datecal.setTitle(datecalRequest.getTitle());
         datecal.setStart(datecalRequest.getStart());
         datecal.setEnd(datecalRequest.getEnd());
-        color.setPrimary(datecalRequest.getColor().getPrimary());
-        color.setSecondary(datecalRequest.getColor().getSecondary());
+        //color.setPrimary(datecalRequest.getColor().getPrimary());
+        //color.setSecondary(datecalRequest.getColor().getSecondary());
 
-        datecal.setColor(color);
+        //datecal.setColor(color);
         datecal.setDraggable(datecalRequest.getDraggable());
         return datecalRepository.save(datecal);
     }
@@ -66,17 +67,8 @@ public class DateCalServiceImpl implements DateCalService {
 
     @Override
     public DateCal getDateCalById(long id) {
-        Optional<DateCal> result = datecalRepository.findById(id);
-        if(result.isPresent()){
-            return result.get();
+        return  datecalRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("DateCal"+id+"id"));
 
-        }else{
-            try {
-                throw new ResourceNotFoundException("DateCal"+id+"id");
-            } catch (ResourceNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
 

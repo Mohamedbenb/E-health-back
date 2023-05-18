@@ -11,6 +11,7 @@ public interface VisiteRepository extends JpaRepository<Visite,Long> {
 
     List<Visite> findByPrimaryTypeId(Long typeId);
     List<Visite> findBySecondaryTypeId(Long typeId);
+    List <Visite> findByValid(Boolean b);
 
 
 

@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface EmployeeService {
     List<Employee> getAllEmployees();
+    List<Employee> getbyuni(Long id, boolean b);
 
     Employee createEmployee(Long uniopId, Employee employee);
 

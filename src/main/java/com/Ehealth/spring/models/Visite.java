@@ -39,8 +39,10 @@ public class Visite {
 
     private TypeVisite secondaryType;
 
-    @Column(name = "visit_date1")
-    private LocalDate visitDate;
+    @OneToOne(cascade = CascadeType.ALL)
+
+    private DateCal datevis;
+
 
     @Column(name = "valid")
     private boolean valid;

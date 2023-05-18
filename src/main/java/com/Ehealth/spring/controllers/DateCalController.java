@@ -27,53 +27,49 @@ public class DateCalController {
     }
 
     @GetMapping
-    public List<DateCalDto> getAllDateCals() {
+    public List<DateCal> getAllDateCals() {
 
-        return datecalService.getAllDateCals().stream().map(
-
-                        datecal -> modelMapper.map(datecal, DateCalDto.class))
-                .collect(Collectors.toList());
+        return datecalService.getAllDateCals();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DateCalDto> getDateCalById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<DateCal> getDateCalById(@PathVariable(name = "id") Long id) {
         DateCal datecal = datecalService.getDateCalById(id);
 
         // convert entity to DTO
-        DateCalDto datecalResponse = modelMapper.map(datecal, DateCalDto.class);
 
-        return ResponseEntity.ok().body(datecalResponse);
+
+        return ResponseEntity.ok().body(datecal);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DateCalDto> createDateCal(@RequestBody DateCalDto datecalDto) {
+    public ResponseEntity<DateCal> createDateCal(@RequestBody DateCal datecalReq) {
 
         // convert DTO to entity
-        DateCal datecalRequest = modelMapper.map(datecalDto, DateCal.class);
 
-        DateCal datecal = datecalService.createDateCal(datecalRequest);
+        DateCal datecal = datecalService.createDateCal(datecalReq);
 
         // convert entity to DTO
-        DateCalDto datecalResponse = modelMapper.map(datecal, DateCalDto.class);
 
-        return new ResponseEntity<DateCalDto>(datecalResponse, HttpStatus.CREATED);
+
+        return new ResponseEntity<DateCal>(datecal, HttpStatus.CREATED);
 
     }
 
     // change the request for DTO
     // change the response for DTO
     @PutMapping("/{id}")
-    public ResponseEntity<DateCalDto> updateDateCal(@PathVariable long id, @RequestBody DateCalDto datecalDto) {
+    public ResponseEntity<DateCal> updateDateCal(@PathVariable long id, @RequestBody DateCal datecalRequest) {
 
         // convert DTO to Entity
-        DateCal datecalRequest = modelMapper.map(datecalDto, DateCal.class);
+
 
         DateCal datecal = datecalService.updateDateCal(id, datecalRequest);
 
         // entity to DTO
-        DateCalDto datecalResponse = modelMapper.map(datecal, DateCalDto.class);
 
-        return ResponseEntity.ok().body(datecalResponse);
+
+        return ResponseEntity.ok().body(datecal);
     }
 
     @PatchMapping("/{id}")

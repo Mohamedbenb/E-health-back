@@ -39,6 +39,11 @@ public class EmployeeController {
 
         return employeeService.getAllEmployees();
     }
+    @GetMapping("/employees/uniop/{id}")
+    public List<Employee> getbyuniop(@PathVariable(name="id") Long id) {
+
+        return employeeService.getbyuni(id, true);
+    }
     @GetMapping("/mainoeus")
     public ResponseEntity<List<String>> getEmployeeStatuses() {
         List<String> employeeStatuses = Arrays.stream(Mainoeu.values())

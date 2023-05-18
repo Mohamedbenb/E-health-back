@@ -30,6 +30,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return employeeRepository.findAllByActive(true);
     }
+
+    @Override
+    public List<Employee> getbyuni(Long uniopid, boolean b) {
+        return employeeRepository.findByUniopIdAndActive(uniopid, true);
+    }
+
     @Override
     public Employee createEmployee(Long uniopId, Employee employee){
 

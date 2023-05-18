@@ -29,15 +29,32 @@ public class UniOp {
     @JsonIgnore
     private Societe societe;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="uniop")
+    @JsonIgnore
     private List<Employee> employees ;
     public UniOp() {}
     @Column(name="active")
     private boolean active;
+    @Transient
+    String socname;
+    @Transient
+    String address;
+    @Transient
+    Long matsoc;
+
     public Boolean isActive() {
         return active;
     }
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+    public String getSocname(){
+        return societe.getTitle();
+    }
+    public String getAddress(){
+        return societe.getAdresse();
+    }
+    public Long getMatsoc(){
+        return societe.getMat();
     }
 }
