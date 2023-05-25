@@ -1,6 +1,7 @@
 package com.Ehealth.spring.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +28,7 @@ public class Visite {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
+    @JsonIgnoreProperties("visites")
     private Employee employee;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="primary_type_id", nullable=false)
@@ -43,7 +46,7 @@ public class Visite {
 
     private DateCal datevis;
 
-
+    private Date dateValidation;
     @Column(name = "valid")
     private boolean valid;
 

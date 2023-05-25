@@ -1,5 +1,6 @@
 package com.Ehealth.spring.services;
 
+import com.Ehealth.spring.events.ColorEventPublisher;
 import com.Ehealth.spring.exception.ResourceNotFoundException;
 import com.Ehealth.spring.models.Color;
 import com.Ehealth.spring.repository.ColorRepository;
@@ -10,10 +11,11 @@ import java.util.List;
 @Service
 public class ColorServiceImpl implements ColorService {
     private final ColorRepository colorRepository;
-
-    public ColorServiceImpl(ColorRepository colorRepository) {
+    private final ColorEventPublisher colorEventPublisher;
+    public ColorServiceImpl(ColorRepository colorRepository, ColorEventPublisher colorEventPublisher) {
         super();
         this.colorRepository = colorRepository;
+        this.colorEventPublisher=colorEventPublisher;
     }
 
     @Override
@@ -27,7 +29,10 @@ public class ColorServiceImpl implements ColorService {
 
     @Override
     public Color create(Color color) {
+
+        colorEventPublisher.publishNewColorEvent(color);
         return colorRepository.save(color);
+
     }
 
     @Override

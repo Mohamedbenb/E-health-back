@@ -2,6 +2,7 @@ package com.Ehealth.spring.models;
 
 import com.Ehealth.spring.enume.Mainoeu;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -9,7 +10,9 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @NoArgsConstructor
@@ -47,8 +50,18 @@ public class Employee {
     private boolean status;
     @Enumerated(EnumType.STRING)
     private Mainoeu mainoeu;
+    @ManyToMany(fetch = FetchType.EAGER,
+    cascade ={
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name="employee_exams",
+                joinColumns={@JoinColumn(name = "employee_id")},
+                inverseJoinColumns = {@JoinColumn(name="exa_comp_id")}
+    )
+    private Set<ExamComp> exams=new HashSet<>();
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @JsonIgnoreProperties("employee")
     private List<Visite> visites = new ArrayList<>();
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="uniop_id", nullable=false)

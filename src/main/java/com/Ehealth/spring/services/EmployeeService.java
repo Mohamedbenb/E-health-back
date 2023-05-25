@@ -13,9 +13,9 @@ public interface EmployeeService {
 
     Employee createEmployee(Long uniopId, Employee employee);
 
-    Employee updateEmployee(Long uniopId,long id, Employee employee);
+    Employee updateEmployee(long id, Employee employee);
 
-    Employee deleteEmployee(Long uniopId,long id);
+    Employee deleteEmployee(long id);
 
     Employee getEmployeeById(Long uniopId,long id);
 }

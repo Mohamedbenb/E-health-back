@@ -46,11 +46,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         }).orElseThrow(() -> new ResourceNotFoundException("uniopId " + uniopId + " not found"));
     }
     @Override
-    public Employee updateEmployee(Long uniopId, long id, Employee employeeRequest) {
+    public Employee updateEmployee(long id, Employee employeeRequest) {
 
-        if (!uniOpRepository.existsById(uniopId)) {
-            throw new ResourceNotFoundException("uniopId " + uniopId + " not found");
-        }
+
 
         return employeeRepository.findById(id).map(employee -> {
 
@@ -76,7 +74,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public Employee deleteEmployee(Long uniopId, long id) {
+    public Employee deleteEmployee( long id) {
         Employee employee = null;
 
         try {

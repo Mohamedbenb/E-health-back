@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import com.Ehealth.spring.models.ERole;
+import com.Ehealth.spring.enume.ERole;
 import com.Ehealth.spring.models.RefreshToken;
 import com.Ehealth.spring.models.Role;
 import com.Ehealth.spring.models.User;

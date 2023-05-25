@@ -1,5 +1,7 @@
 package com.Ehealth.spring.models;
 
+import com.Ehealth.spring.enume.ERole;
+
 import javax.persistence.*;
 
 @Entity

@@ -52,6 +52,7 @@ public class DeclarationServiceImpl implements DeclarationService{
             declaration.setTypederisque(declarationReq.getTypederisque());
             declaration.setConstat(declarationReq.getConstat());
             declaration.setDepotcnam(declarationReq.isDepotcnam());
+            declaration.setDateDec(declarationReq.getDateDec());
             declaration.setDiagnosticcnam(declarationReq.isDiagnosticcnam());
             declaration.setReponsecnam(declarationReq.getReponsecnam());
             declaration.setRemarque(declarationReq.getRemarque());
@@ -92,6 +93,15 @@ public class DeclarationServiceImpl implements DeclarationService{
             }
         }
 
+    }
+
+    @Override
+    public List<Declaration> getByEmployee(Long employeeId, boolean b) {
+        try{
+            return declarationRepository.findByEmpIdAndActive(employeeId, b);
+        }catch (ResourceNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

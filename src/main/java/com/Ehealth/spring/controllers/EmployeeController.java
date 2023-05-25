@@ -77,20 +77,17 @@ public class EmployeeController {
 
     // change the request for DTO
     // change the response for DTO
-    @PutMapping("/employees/{uniopId}/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "uniopId") Long uniopId, @PathVariable long id, @RequestBody Employee employeeRequest) {
+    @PutMapping("/employees/{id}")
+    public ResponseEntity<Employee> updateEmployee( @PathVariable long id, @RequestBody Employee employeeRequest) {
 
-
-
-        Employee employeeResponse = employeeService.updateEmployee(uniopId, id, employeeRequest);
-
-
+        Employee employeeResponse = employeeService.updateEmployee( id, employeeRequest);
         return ResponseEntity.ok().body(employeeResponse);
+
     }
 
-    @PatchMapping("/employees/{uniopId}/{id}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable(value = "uniopId") Long uniopId, @PathVariable(value = "id") Long id) {
-        employeeService.deleteEmployee(uniopId, id);
+    @PatchMapping("/employees/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable(value = "id") Long id) {
+        employeeService.deleteEmployee( id);
 
         return new ResponseEntity<>( HttpStatus.OK);
     }

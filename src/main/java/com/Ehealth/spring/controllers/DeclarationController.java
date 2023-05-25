@@ -30,18 +30,25 @@ public class DeclarationController {
     {
         return declarationService.getall();
     };
-    @GetMapping(value = "{id}")
+    @GetMapping("/emp/{id}")
+    public List<Declaration> getall(@PathVariable Long id)
+
+    {
+
+        return declarationService.getByEmployee(id, true);
+    };
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Declaration> getone(@PathVariable long id){
         Declaration declarationResponse =  declarationService.getone(id);
         return ResponseEntity.ok().body(declarationResponse);
     };
-    @PatchMapping(value = "del/{id}")
+    @PatchMapping(value = "/del/{id}")
     public ResponseEntity<String> delete(@PathVariable(value = "id") Long id) {
         declarationService.delete(id);
 
         return new ResponseEntity<>( HttpStatus.OK);
     }
-    @PutMapping(value="ed/{idemp}/{idmal}/{id}")
+    @PutMapping(value="/ed/{idemp}/{idmal}/{id}")
     public ResponseEntity<Declaration> updateEmployee( @PathVariable(value="id") long id, @PathVariable(value="idemp") long idemp,@PathVariable(value="idmal") long idmal, @RequestBody Declaration declarationRequest) {
 
         Declaration declarationResponse = declarationService.update(id, idemp, idmal, declarationRequest);

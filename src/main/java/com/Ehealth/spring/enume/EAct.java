@@ -1,4 +1,4 @@
-package com.Ehealth.spring.models;
+package com.Ehealth.spring.enume;
 
 public enum EAct {
     MOI,
