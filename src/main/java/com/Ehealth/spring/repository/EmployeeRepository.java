@@ -16,4 +16,5 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
     Optional<Employee> findByIdAndActive(Long employeeId, boolean a);
     Optional<Employee> findByIdAndUniopId(Long uniopId, long id);
     List<Employee> findByUniopIdAndActive(Long uniopId, boolean b);
+    List<Employee> findByVisitesIdAndActive(Long visiteId, boolean b);
 }

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,17 +22,23 @@ public class ExamComp  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String frequence;
-    private String rappel;
-    @ManyToMany(fetch = FetchType.EAGER,
-                cascade={
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-                },
-                mappedBy = "exams")
-    //@JsonIgnoreProperties("exams")
-    private Set<Employee> employees= new HashSet<>();
+
+
+    private Date rappel;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    @JsonIgnoreProperties("exams")
+    private Employee employee;
+
+    @OneToOne(cascade = CascadeType.ALL)
+
+    private DateCal dateExam;
     private String recommendation;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name="exam_type_id", nullable=false)
+    private TypeExam typeExam;
+
+    private Date dateValidation;
+    private boolean valid;
     private boolean active = true;
 }

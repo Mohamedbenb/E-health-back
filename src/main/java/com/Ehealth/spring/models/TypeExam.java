@@ -1,17 +1,13 @@
 package com.Ehealth.spring.models;
 
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -19,7 +15,7 @@ import java.util.List;
 @Data
 @Entity
 @Builder
-public class TypeVisite {
+public class TypeExam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -27,20 +23,12 @@ public class TypeVisite {
     @Column(name="type")
     private String type;
 
+    private Long frequence;
+    @OneToMany(mappedBy = "typeExam", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("typeExam")
+    List<ExamComp>exams;
 
-    @OneToMany(mappedBy = "primaryType", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Visite> primaryVisites;
-
-    @OneToMany(mappedBy = "secondaryType", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Visite> secondaryVisites;
-
-    private int frequency;
-    @Column(name="remarque")
-    private String remarque;
     @OneToOne
     private Color color;
     private boolean active = true;
-
 }

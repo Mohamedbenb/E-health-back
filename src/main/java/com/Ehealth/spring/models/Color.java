@@ -27,4 +27,7 @@ public class Color {
     private TypeVisite typeVisite;
     @OneToOne
     private DateCal dateCal;
+    @OneToOne
+    @JsonIgnore
+    private TypeExam typeExam;
 }

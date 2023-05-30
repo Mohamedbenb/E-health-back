@@ -14,5 +14,6 @@ public interface DeclarationService {
     Declaration delete(Long id);
     Declaration getone(Long id);
     List<Declaration> getByEmployee(Long employeeId, boolean b);
+    List<Declaration> getByMal(Long malId, boolean b);
 
 }

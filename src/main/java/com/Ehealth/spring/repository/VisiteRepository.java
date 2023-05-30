@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface VisiteRepository extends JpaRepository<Visite,Long> {
     List<Visite> findByEmployeeId(Long id);
 
-    List<Visite> findByPrimaryTypeId(Long typeId);
+    List<Visite> findByPrimaryTypeIdAndValid(Long typeId, boolean b);
     List<Visite> findBySecondaryTypeId(Long typeId);
     List <Visite> findByValid(Boolean b);
 

@@ -31,11 +31,18 @@ public class DeclarationController {
         return declarationService.getall();
     };
     @GetMapping("/emp/{id}")
-    public List<Declaration> getall(@PathVariable Long id)
+    public List<Declaration> getallEmp(@PathVariable Long id)
 
     {
 
         return declarationService.getByEmployee(id, true);
+    };
+    @GetMapping("/mal/{id}")
+    public List<Declaration> getallMal(@PathVariable Long id)
+
+    {
+
+        return declarationService.getByMal(id, true);
     };
     @GetMapping(value = "/{id}")
     public ResponseEntity<Declaration> getone(@PathVariable long id){

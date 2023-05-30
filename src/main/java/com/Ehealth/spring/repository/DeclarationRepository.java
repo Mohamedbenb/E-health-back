@@ -9,4 +9,7 @@ import java.util.List;
 public interface DeclarationRepository extends JpaRepository <Declaration,Long > {
     List<Declaration> findAllByActive(boolean b);
     List<Declaration> findByEmpIdAndActive(Long empi, boolean b);
+
+
+    List<Declaration> findByMalIdAndActive(Long malId, boolean b);
 }

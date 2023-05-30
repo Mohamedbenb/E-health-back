@@ -104,6 +104,15 @@ public class DeclarationServiceImpl implements DeclarationService{
         }
     }
 
+    @Override
+    public List<Declaration> getByMal(Long malId, boolean b) {
+        try{
+            return declarationRepository.findByMalIdAndActive(malId, b);
+        }catch (ResourceNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
 

@@ -50,22 +50,17 @@ public class Employee {
     private boolean status;
     @Enumerated(EnumType.STRING)
     private Mainoeu mainoeu;
-    @ManyToMany(fetch = FetchType.EAGER,
-    cascade ={
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name="employee_exams",
-                joinColumns={@JoinColumn(name = "employee_id")},
-                inverseJoinColumns = {@JoinColumn(name="exa_comp_id")}
-    )
-    private Set<ExamComp> exams=new HashSet<>();
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("employee")
+    private List<ExamComp> exams = new ArrayList<>();
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Visite> visites = new ArrayList<>();
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name="uniop_id", nullable=false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+
 
     private UniOp uniop;
     @Transient

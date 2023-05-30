@@ -86,8 +86,8 @@ public class VisiteServiceImpl implements VisiteService{
     }
 
     @Override
-    public List<Visite> getVisitsByTypeVisite(Long visitTypeId) {
-        return visiteRepository.findByPrimaryTypeId(visitTypeId);
+    public List<Visite> getVisitsByTypeVisite(Long visitTypeId, boolean b) {
+        return visiteRepository.findByPrimaryTypeIdAndValid(visitTypeId, b);
     }
 
     @Override
@@ -124,6 +124,11 @@ public class VisiteServiceImpl implements VisiteService{
     @Override
     public Visite getByDateVis(Long dateVisId, boolean b) {
         return visiteRepository.findBydatevisIdAndActive(dateVisId,b).orElseThrow(() -> new ResourceNotFoundException("Visit with ID  not found"));
+    }
+
+    @Override
+    public List<Employee> getEmployees(Long visiteId,boolean b) {
+        return employeeRepository.findByVisitesIdAndActive(visiteId, b);
     }
 
 }

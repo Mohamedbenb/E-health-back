@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface ExamCompRepository extends JpaRepository <ExamComp,Long> {
 
     List<ExamComp> findByActive(boolean b);
-    List<ExamComp> findByEmployeesIdAndActive(Long empId, boolean b);
+    List<ExamComp> findByEmployeeIdAndActive(Long empId, boolean b);
     Optional<ExamComp> findByIdAndActive(Long examCompId, boolean b);
+    List <ExamComp> findBydateExamActiveAndValid(boolean b1, boolean b2);
 }

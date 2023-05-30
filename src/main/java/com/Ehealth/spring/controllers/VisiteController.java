@@ -70,7 +70,7 @@ public class VisiteController {
     }
     @GetMapping("/type/{visitTypeId}")
     public ResponseEntity<List<Visite>> getVisitsByTypeVisite(@PathVariable Long visitTypeId) {
-        List<Visite> visites = visiteService.getVisitsByTypeVisite(visitTypeId);
+        List<Visite> visites = visiteService.getVisitsByTypeVisite(visitTypeId, true);
         return ResponseEntity.ok(visites);
     }
 

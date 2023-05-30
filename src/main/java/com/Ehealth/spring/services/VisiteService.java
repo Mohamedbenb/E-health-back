@@ -12,11 +12,12 @@ public interface VisiteService {
     List<Visite>  createVisit(List<Long> employeeIds, List<Long> primaryTypeIds, Long secondTypeId, DateCal datevis);
     List<Visite> getAllVisits();
     List<Visite> getVisitsByEmployee(Long employeeId, Boolean b);
-    List<Visite> getVisitsByTypeVisite(Long visitTypeId);
+    List<Visite> getVisitsByTypeVisite(Long visitTypeId, boolean b);
     Visite getVisitById(Long visitId);
     Visite deleteVisite(Long visitId);
     List <Visite> getunvalid(boolean b1, boolean b2);
     Visite ValidateVisite(Long visitId, String visite);
     Visite getByDateVis(Long dateVisId, boolean b);
+    List<Employee> getEmployees(Long visiteId, boolean b);
 
 }

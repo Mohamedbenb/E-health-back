@@ -34,6 +34,9 @@ public class DateCal {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     private Visite visite;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private ExamComp examComp;
     @Column(name="active")
     private boolean active;
     @OneToOne
