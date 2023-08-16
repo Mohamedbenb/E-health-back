@@ -28,10 +28,11 @@ public class VisiteController {
         for (VisitRequest request : visitRequests) {
             Long employeeId = request.getEmployeeId();
             Long primaryTypeId = request.getPrimaryTypeId();
+            List<Long> visiteId = request.getVisiteIds();
             DateCal datevis = request.getDatevis();
 
             // Create the visit and add it to the list of created visits
-            List<Visite> visits = visiteService.createVisit(Collections.singletonList(employeeId), Collections.singletonList(primaryTypeId), null, datevis);
+            List<Visite> visits = visiteService.createVisit(Collections.singletonList(employeeId), Collections.singletonList(primaryTypeId), visiteId, null, datevis);
             createdVisits.addAll(visits);
         }
 
@@ -49,13 +50,18 @@ public class VisiteController {
 
     @GetMapping("/{visitId}")
     public ResponseEntity<Visite> getVisitById(@PathVariable Long visitId) {
-        Visite visite = visiteService.getVisitById(visitId);
+        Visite visite = visiteService.getVisitById(visitId,true);
         return ResponseEntity.ok(visite);
     }
 
     @GetMapping("/employee/{employeeId}")
     public ResponseEntity<List<Visite>> getVisitsByEmployee(@PathVariable Long employeeId) {
         List<Visite> visites = visiteService.getVisitsByEmployee(employeeId, true);
+        return ResponseEntity.ok(visites);
+    }
+    @GetMapping("/employee/{employeeId}/{typeId}")
+    public ResponseEntity<List<Visite>> getIncomplete(@PathVariable Long employeeId, @PathVariable Long typeId){
+        List<Visite> visites = visiteService.getIncompleteSms(employeeId, typeId, true);
         return ResponseEntity.ok(visites);
     }
     @PutMapping("/validate/{id}")

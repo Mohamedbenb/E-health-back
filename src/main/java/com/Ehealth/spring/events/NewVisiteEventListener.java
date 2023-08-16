@@ -4,12 +4,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NewVisiteEventListener implements ApplicationListener<NewVisiteEvent> {
+public class NewVisiteEventListener {
 
-    @Override
-    public void onApplicationEvent(NewVisiteEvent event) {
-        // Handle the event here
-        System.out.println("NewVisiteEvent received for visite ID: " + event.getVisite().getId());
-        // Perform any desired actions, such as displaying a notification or logging the event
-    }
+
 }

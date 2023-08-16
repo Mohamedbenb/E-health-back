@@ -1,9 +1,6 @@
 package com.Ehealth.spring.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 
@@ -12,7 +9,11 @@ import javax.persistence.Entity;
 
 @Builder
 @Data
+@ToString
 public class Message {
-    private String from;
-    private String text;
+    private String senderName;
+    private String receiverName;
+    private String  message;
+    private String date;
+    private Status status;
 }

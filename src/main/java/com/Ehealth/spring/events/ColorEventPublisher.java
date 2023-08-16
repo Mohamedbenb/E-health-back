@@ -8,13 +8,5 @@ import org.springframework.stereotype.Component;
 @Component
 public class ColorEventPublisher {
 
-    private final SimpMessagingTemplate messagingTemplate;
 
-    public ColorEventPublisher(SimpMessagingTemplate messagingTemplate) {
-        this.messagingTemplate = messagingTemplate;
-    }
-
-    public void publishNewColorEvent(Color color) {
-        messagingTemplate.convertAndSend("/topic/new-color", color);
-    }
 }

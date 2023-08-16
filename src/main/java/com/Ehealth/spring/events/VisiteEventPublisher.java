@@ -7,14 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class VisiteEventPublisher {
 
-    private final SimpMessagingTemplate messagingTemplate;
 
-    public VisiteEventPublisher(SimpMessagingTemplate messagingTemplate) {
-        this.messagingTemplate = messagingTemplate;
-    }
-
-    public void publishNewVisiteEvent(Visite visite) {
-        messagingTemplate.convertAndSend("/topic/new-visite", visite);
-    }
 }
 

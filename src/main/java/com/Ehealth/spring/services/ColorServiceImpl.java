@@ -30,7 +30,7 @@ public class ColorServiceImpl implements ColorService {
     @Override
     public Color create(Color color) {
 
-        colorEventPublisher.publishNewColorEvent(color);
+
         return colorRepository.save(color);
 
     }

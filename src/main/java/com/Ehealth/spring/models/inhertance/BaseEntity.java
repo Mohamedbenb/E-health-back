@@ -5,17 +5,14 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
 
 @MappedSuperclass
 @Data
-@EntityListeners(AuditingEntityListener.class)
-public class BaseEntity {
+public abstract class BaseEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @CreatedDate
-    @Column(name="creationDate",updatable = false)
-    private Instant creationDate;
-    private Instant lastModifiedDate;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "default_gen")
+      private Long id;
+
 }

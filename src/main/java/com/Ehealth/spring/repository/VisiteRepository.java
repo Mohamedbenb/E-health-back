@@ -12,12 +12,14 @@ public interface VisiteRepository extends JpaRepository<Visite,Long> {
 
     List<Visite> findByPrimaryTypeIdAndValid(Long typeId, boolean b);
     List<Visite> findBySecondaryTypeId(Long typeId);
-    List <Visite> findByValid(Boolean b);
+    List <Visite> findByActive(Boolean b);
 
     List <Visite> findByEmployeeIdAndValid(Long id, Boolean b);
     Optional<Visite> findBydatevisIdAndActive(Long dateVisid, boolean b);
     List <Visite> findBydatevisActiveAndValid(boolean b1, boolean b2);
-
+    List<Visite> findByEmployeeIdAndPrimaryTypeIdAndValid(Long employeeId,Long primayTypeId, Boolean v);
+    Optional<Visite> findByIdAndValid( Long id, Boolean v);
+    List<Visite> findByEmployeeIdAndIdAndValid(Long employeeId,Long Id, Boolean v);
 
 
 }

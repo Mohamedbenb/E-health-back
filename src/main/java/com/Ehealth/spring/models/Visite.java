@@ -46,7 +46,9 @@ public class Visite {
 
     private DateCal datevis;
 
+
     private Date dateValidation;
+    private Date dateValidation2;
     @Column(name = "valid")
     private boolean valid;
 

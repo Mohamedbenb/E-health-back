@@ -29,7 +29,7 @@ public class Declaration  {
     private String constat;
     private boolean depotcnam;
     private boolean diagnosticcnam;
-    private String reponsecnam;
+    private String reponsecnam = "No response";
     private String remarque;
 
     private boolean active = true;
